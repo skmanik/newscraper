@@ -1,6 +1,6 @@
 # Newscraper
 
-A simple news app that scrapes articles from Google News' Technology section. Allows user to favorite as well as comment on articles selected.
+A simple news app that scrapes articles from the Technology section of Google News. Allows user to favorite as well as comment on articles selected.
 
 Link to site: [Newscraper](https://google.com)
 
