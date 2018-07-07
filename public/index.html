@@ -1,0 +1,63 @@
+<html lang="en-us">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>NS - Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="favi.png" sizes="32x32">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <section class="hero __banner">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title __title"><a href="/">Newscraper</a></h1>
+                <h2 class="subtitle">Browse, save and comment on our freshly scraped articles below.</h2>
+                <a class="button is-link is-outlined __favorites" href="/saved">View Favorites</a>
+            </div>
+        </div>
+	</section>
+
+	<section class="__main">
+		<div class="container">
+			<div class="tabs __tabs">
+			  <ul>
+			    <li class="is-active"><a>Latest Articles</a></li>
+			    
+			    <li><a href="/scrape">Add Articles</a></li>
+			    <li><a id="__clear">Clear Articles</a></li>
+			  </ul>
+			</div>
+			<ul class="__articles">
+				<li class="__article">
+					<h2 class="title"><a>This is an example news title.</a></h2>
+					<p class="subtitle">This is an example news subtitle.</p>
+					<div class="__actions">
+						<div class="__save">
+							<i class="far fa-heart"></i>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<footer class="footer __footer">
+	  <div class="content has-text-centered">
+	    <p>
+	      Articles scraped from <strong>Google News</strong>. Icons by <strong>Freepik</strong> and <strong>FontAwesome</strong>.<br />To learn more about this project, view it on <a href="https://github.com/skmanik/newscraper">GitHub</a>.
+	    </p>
+	  </div>
+	</footer>
+
+	<!-- action -->
+	<script src="js/home.js"></script>
+
+</body>
+</html>
