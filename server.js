@@ -19,7 +19,7 @@ var db = require("./models");
 
 // PORT, ADD ONE FOR HEROKU VERSION
 // =====================
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 
 // INITIALIZE EXPRESS
 // =====================
@@ -36,7 +36,13 @@ app.use(express.static("public"));
 
 // CONNECT TO MONGODB
 // =====================
-mongoose.connect("mongodb://localhost/newscraperdb");
+var MONGODB_URI =
+	process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
+
+// mongoose.connect("mongodb://localhost/newscraperdb");
 
 // ROUTES
 // =====================
