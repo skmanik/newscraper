@@ -54,16 +54,16 @@ app.get("/save", function(req, res) {
 // api routes
 // route for getting all articles from the db
 app.get("/articles", function(req, res) {
-  // grab every document in the Articles collection
-  db.Article.find({})
-    .then(function(dbArticle) {
-      // if we were able to successfully find Articles, send them back to the client
-      res.json(dbArticle);
-    })
-    .catch(function(err) {
-      // if an error occurred, send it to the client
-      res.json(err);
-    });
+	// grab every document in the Articles collection
+	db.Article.find({})
+		.then(function(dbArticle) {
+			// if we were able to successfully find Articles, send them back to the client
+			res.json(dbArticle);
+		})
+		.catch(function(err) {
+			// if an error occurred, send it to the client
+			res.json(err);
+		});
 });
 
 // scrape route
@@ -76,18 +76,22 @@ app.get("/scrape", function(req, res) {
 
 		// now, we grab every story container and do the following:
 		$(".image-story-container_2baSf").each(function(i, element) {
-			// Save an empty result object
 			var result = {};
 
-			// add the link and subheading and save them as properties of the result object
+			// add the link text, href, and subheading text and save all as properties of result object
 			result.title = $(this)
-				.children("h2.headline_ZR_Fh a")
+				.children("div")
+				.children(".headline_ZR_Fh")
+				.children("a")
 				.text();
 			result.link = $(this)
-				.children("h2.headline_ZR_Fh a")
+				.children("div")
+				.children(".headline_ZR_Fh")
+				.children("a")
 				.attr("href");
 			result.subhead = $(this)
-				.children("p.lede_Wa-ek")
+				.children("div")
+				.children(".lede_Wa-ek")
 				.text();
 
 			// log test
