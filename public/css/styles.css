@@ -6,32 +6,35 @@ html, body {
 
 .__main {
 	min-height: 100%;
-    margin-bottom: -120px;
     padding: 0rem 1.5rem;
-}
-
-.__title {
-    padding-bottom: 0.5rem;
-    font-size: 2.5rem;
-}
-
-.__article {
-    padding: 2.5rem 0rem;
-    border-bottom: 1px solid #e8e8e8;
-    position: relative;
-}
-
-.__article .subtitle {
-    color: #8F8F8F;
-    margin-bottom: 0;
+    margin-bottom: 8rem;
 }
 
 .__banner .subtitle {
     color: #8F8F8F;
 }
 
+
+.__banner .__title {
+    padding-bottom: 0.5rem;
+    font-size: 2.5rem;
+}
+
+.__article {
+    padding: 2.5rem 8rem 2.5rem 0;
+    border-bottom: 1px solid #e8e8e8;
+    position: relative;
+}
+
 .__article .title {
     padding-bottom: 0.25rem;
+    font-size: 1.5rem;
+}
+
+.__article .subtitle {
+    color: #8F8F8F;
+    font-size: 1rem;
+    margin-bottom: 0;
 }
 
 .__tabs {

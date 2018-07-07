@@ -47,18 +47,18 @@ app.get("/", function(req, res) {
 });
 
 // route for favorites page
-app.get("/save", function(req, res) {
+app.get("/saved", function(req, res) {
 	res.sendFile(path.join(__dirname, "./public/favorites.html"));
 });
 
 // api routes
 // route for getting all articles from the db
-app.get("/articles", function(req, res) {
+app.get("/api/articles", function(req, res) {
 	// grab every document in the Articles collection
 	db.Article.find({})
-		.then(function(dbArticle) {
+		.then(function(dbArticles) {
 			// if we were able to successfully find Articles, send them back to the client
-			res.json(dbArticle);
+			res.json(dbArticles);
 		})
 		.catch(function(err) {
 			// if an error occurred, send it to the client
@@ -67,7 +67,7 @@ app.get("/articles", function(req, res) {
 });
 
 // scrape route
-app.get("/scrape", function(req, res) {
+app.get("/api/scrape", function(req, res) {
 	var news = "https://www.reuters.com/news/technology";
 	// first, we grab the body of the html with request
 	axios.get(news).then(function(response) {
@@ -98,15 +98,24 @@ app.get("/scrape", function(req, res) {
 			console.log("THIS IS THE RESULT", result);
 
 			// create a new Article using the `result` object built from scraping
-			db.Article.create(result)
-				.then(function(dbArticle) {
-					// view the added result in the console
-					console.log(dbArticle);
-				})
-				.catch(function(err) {
-					// iff an error occurred, send it to the client
-					return res.json(err);
-				});
+			db.Article.findOne({ link: result.link }, function(err, dbArticle) {
+				if (err) {
+					console.log(err);
+					return;
+				}
+
+				if (!dbArticle) {
+					db.Article.create(result)
+						.then(function(dbArticle) {
+							// view the added result in the console
+							console.log(dbArticle);
+						})
+						.catch(function(err) {
+							// iff an error occurred, send it to the client
+							console.log(err);
+						});
+				}
+			});
 		});
 
 		// if we were able to successfully scrape and save an Article, send a message to the client
