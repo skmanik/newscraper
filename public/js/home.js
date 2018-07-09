@@ -8,15 +8,16 @@ function renderArticles() {
 			var title = data[i].title;
 			var link = data[i].link;
 			var subhead = data[i].subhead;
+			var id = data[i]._id;
 
 			// build article widget
 			$(".__articles").append(`
-				<li class="__article">
+				<li class="__article" id=${id}>
 					<h2 class="title"><a href=${link}>${title}</a></h2>
 					<p class="subtitle">${subhead}</p>
 					<div class="__actions">
-						<div class="__save">
-							<i class="far fa-heart"></i>
+						<div class="__comment">
+							<i class="far fa-comment"></i>
 						</div>
 					</div>
 				</li>

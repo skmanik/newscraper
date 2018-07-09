@@ -37,7 +37,7 @@ app.use(express.static("public"));
 // CONNECT TO MONGODB
 // =====================
 var MONGODB_URI =
-	process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+	process.env.MONGODB_URI || "mongodb://localhost/newscraperdb";
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
@@ -48,11 +48,6 @@ mongoose.connect(MONGODB_URI);
 // route for home page
 app.get("/", function(req, res) {
 	res.sendFile(path.join(__dirname, "./public/index.html"));
-});
-
-// route for favorites page
-app.get("/saved", function(req, res) {
-	res.sendFile(path.join(__dirname, "./public/favorites.html"));
 });
 
 // api routes

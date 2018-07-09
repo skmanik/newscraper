@@ -56,7 +56,7 @@
     right: 0;
 }
 
-.__save, .__unsave, .__comment {
+.__comment {
     display: inline-block;
     margin-left: 0.65rem;
     width: 65px;
@@ -69,7 +69,7 @@
     cursor: pointer;
 }
 
-.__save i, .__unsave i, .__comment i {
+.__comment i {
     line-height: 65px;
 }
 
