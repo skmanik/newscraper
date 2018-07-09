@@ -36,8 +36,7 @@ app.use(express.static("public"));
 
 // CONNECT TO MONGODB
 // =====================
-var MONGODB_URI =
-	process.env.MONGODB_URI || "mongodb://localhost/newscraperdb";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newscraperdb";
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
@@ -66,23 +65,57 @@ app.get("/api/articles", function(req, res) {
 });
 
 // route for particular article and its associated notes
-app.get("/articles/:id", function(req, res) {
-  // using the id passed in the id parameter, prepare a query that finds the matching one in our db...
-  db.Article.findOne({ _id: req.params.id })
-    // ..and populate all of the notes associated with it
-    .populate("note")
-    .then(function(dbArticle) {
-      // if we were able to successfully find an Article with the given id, send it back to the client
-      res.json(dbArticle);
-    })
-    .catch(function(err) {
-      // if an error occurred, send it to the client
-      res.json(err);
-    });
+app.get("/api/articles/:id", function(req, res) {
+	// using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+	db.Article.findOne({ _id: req.params.id })
+		// ..and populate all of the notes associated with it
+		.populate("note")
+		.then(function(dbArticle) {
+			// if we were able to successfully find an Article with the given id, send it back to the client
+			res.json(dbArticle);
+		})
+		.catch(function(err) {
+			// if an error occurred, send it to the client
+			res.json(err);
+		});
 });
 
 // route for posting note to particular article
+app.post("/api/articles/:id", function(req, res) {
+	// Create a new note and pass the req.body to the entry
+	db.Note.create(req.body)
+		.then(function(dbNote) {
+			return db.Article.findOneAndUpdate(
+				{ _id: req.params.id },
+				{ $push: { note: dbNote._id } },
+				{ new: true }
+			);
+		})
+		.then(function(dbArticle) {
+			// If we were able to successfully update an Article, send it back to the client
+			res.json(dbArticle);
+		})
+		.catch(function(err) {
+			// If an error occurred, send it to the client
+			res.json(err);
+		});
+});
 
+// route for deleting note from particular article
+app.delete("/api/notes/:id", function(req, res) {
+	// Create a new note and pass the req.body to the entry
+	db.Note.remove({
+		_id: req.params.id
+	})
+		.then(function(dbNote) {
+			// If we were able to successfully update an Article, send it back to the client
+			res.json(dbNote);
+		})
+		.catch(function(err) {
+			// If an error occurred, send it to the client
+			res.json(err);
+		});
+});
 
 // route for clearing db
 app.get("/api/clear", function(req, res) {
@@ -101,7 +134,7 @@ app.get("/api/scrape", function(req, res) {
 		// then, we load that into cheerio and save it to $ for a shorthand selector
 		var $ = cheerio.load(response.data);
 		//  to avoid duplicates bc Reuters is stupid
-		var resultArray = []; 
+		var resultArray = [];
 
 		// now, we grab every story container and do the following:
 		$(".image-story-container_2baSf").each(function(i, element) {
@@ -130,9 +163,6 @@ app.get("/api/scrape", function(req, res) {
 			// push into array
 			resultArray.push(result.link);
 
-			// log test
-			console.log(i, result.link);
-
 			// create a new Article using the `result` object built from scraping
 			db.Article.findOne({ link: result.link }, function(err, dbArticle) {
 				if (err) {
@@ -141,8 +171,6 @@ app.get("/api/scrape", function(req, res) {
 				}
 
 				if (!dbArticle) {
-
-					console.log(i, "creatin", result.link);
 					db.Article.create(result)
 						.then(function(dbArticle) {
 							// view the added result in the console
@@ -157,7 +185,7 @@ app.get("/api/scrape", function(req, res) {
 		});
 
 		// if we were able to successfully scrape and save an Article, send a message to the client
-		res.send("Beep boop. Scrape complete!");
+		setTimeout(function () { res.send("Beep boop. Scrape complete!") }, 200);
 	});
 });
 

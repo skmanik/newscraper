@@ -14,12 +14,38 @@
 </head>
 
 <body>
+	<!-- modal for notes -->
+	<div class="modal">
+	  <div class="modal-background"></div>
+	  <div class="modal-content">
+	    <div class="box">
+	    	<div class="__notes">
+	    		<label class="label">Notes</label>
+	    		<ul>
+	    			<!-- notes generated here -->
+	    		</ul>
+	    	</div>
+
+	    	<!-- input area -->
+			<div class="field">
+			  <label class="label">Add Note</label>
+			  <div class="control">
+			    <textarea class="textarea" placeholder="Textarea" id="__addnote"></textarea>
+			  </div>
+			</div>
+			<div class="control">
+			    <button class="button is-link" id="__submit" type="submit">Submit</button>
+			</div>
+	    </div>
+	  </div>
+	  <button class="modal-close is-large" aria-label="close"></button>
+	</div>
 
     <section class="hero __banner">
         <div class="hero-body">
             <div class="container">
                 <h1 class="title __title"><a href="/">Newscraper</a></h1>
-                <h2 class="subtitle">Browse, favorite and comment on our scraped articles below.</h2>
+                <h2 class="subtitle">Browse and comment on our scraped articles below. If no articles are present, click "Add Articles" to begin.</h2>
             </div>
         </div>
 	</section>

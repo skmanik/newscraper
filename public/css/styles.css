@@ -73,10 +73,25 @@
     line-height: 65px;
 }
 
-.__favorites {
+.modal-content {
+    max-height: 100% !important;
+}
+
+.__notes {
+    margin-bottom: 50px;
+}
+
+.__notes ul li {
+    position: relative;
+    padding-right: 25px;
+}
+
+.__delete {
     position: absolute;
-    top: 10px;
+    top: 0;
     right: 0;
+    padding-top: 4px;
+    cursor: pointer;
 }
 
 /* sticky footer */
