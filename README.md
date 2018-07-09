@@ -1,25 +1,21 @@
 # Newscraper
 
-A simple news app that scrapes articles from Reuters. Allows user to favorite as well as comment on articles selected.
+A simple news app that scrapes articles from Reuters. Allows user to add articles, clear articles, and add notes to each article.
 
-Link to site: [Newscraper](https://google.com)
+Link to site: [Newscraper](https://powerful-springs-81088.herokuapp.com/)
 
 ## Instructions
 
 For the home page:
 
-- Click on an article to be taken to its original website.
-
-- To favorite an article, click the `Heart Symbol` on the far right.
-
 - If no articles are listed, press `Add Articles` to scrape new content.
 
-For the favorites page:
+- Click on an article title to be taken to its original website.
 
-- To add comments to an article, click the `Bubble Symbol` on the far right.
+- To add notes to an article, click the `Bubble Symbol` on the far right. A pop-up will appear.
 
-- To delete an article from your favorites, click the `X Symbol` on the far right.
- 
+- To delete notes from an article, click the appropriate `Trash Symbol` on the far right of the pop-up.
+
 
 ## Built With
 
